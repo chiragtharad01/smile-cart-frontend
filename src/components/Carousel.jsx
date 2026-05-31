@@ -1,0 +1,56 @@
+import { useState } from "react";
+
+import classNames from "classnames";
+import { Left, Right } from "neetoicons";
+import { Button } from "neetoui";
+
+const Carousel = ({ imageUrls, title }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const handleNext = () => {
+    setCurrentIndex(prev => (prev + 1) % imageUrls.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex(prev => (prev - 1 + imageUrls.length) % imageUrls.length);
+  };
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="flex items-center ">
+        <Button
+          className="hover:bg-transparent"
+          icon={Left}
+          style="text"
+          onClick={handlePrevious}
+        />
+        <img
+          alt={title}
+          className="max-w-56 h-56 max-h-56 w-56"
+          src={imageUrls[currentIndex]}
+        />
+        <Button
+          className="hover:bg-transparent"
+          icon={Right}
+          style="text"
+          onClick={handleNext}
+        />
+      </div>
+      <div className="flex space-x-1">
+        {imageUrls.map((_, ind) => (
+          // const defaultClass = "neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border"
+          // const dotClassName = ind === currentIndex ? defaultClass.concat(" neeto-ui-bg-black") : defaultClass
+          <span
+            key={ind}
+            className={classNames(
+              "neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border",
+              { "neeto-ui-bg-black": ind === currentIndex }
+            )}
+            onClick={() => setCurrentIndex(ind)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Carousel;
