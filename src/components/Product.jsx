@@ -24,14 +24,7 @@ const Product = () => {
     fetchProduct();
   }, []);
 
-  const {
-    name,
-    description,
-    mrp,
-    offerPrice,
-    imageUrls,
-    imageUrl,
-  } = product;
+  const { name, description, mrp, offerPrice, imageUrls, imageUrl } = product;
   const totalDiscount = mrp - offerPrice;
   const discountPercentage = ((totalDiscount / mrp) * 100).toFixed(1);
   if (isLoading) {
