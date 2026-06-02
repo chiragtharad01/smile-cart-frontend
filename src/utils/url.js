@@ -1,5 +1,5 @@
 import { keysToSnakeCase } from "neetocist";
-import { isEmpty, omit, pipe, toPairs } from "ramda";
+import { omit, pipe, toPairs } from "ramda";
 
 export const buildUrl = (route, params) => {
   const placeHolders = [];
@@ -12,5 +12,7 @@ export const buildUrl = (route, params) => {
 
   const queryParams = pipe(omit(placeHolders), keysToSnakeCase)(params);
 
-  return isEmpty(queryParams) ? route : `${route}?${queryParams}`;
+  const queryString = new URLSearchParams(queryParams).toString();
+
+  return queryString ? `${route}?${queryString}` : route;
 };
