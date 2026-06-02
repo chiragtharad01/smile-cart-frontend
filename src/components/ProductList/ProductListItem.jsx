@@ -5,13 +5,7 @@ import { Link } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
 
-const ProductListItem = ({
-  imageUrl,
-  name,
-  offerPrice,
-  slug,
-  availableQuantity,
-}) => {
+const ProductListItem = ({ imageUrl, name, offerPrice, slug }) => {
   const { t } = useTranslation();
 
   return (
@@ -24,7 +18,7 @@ const ProductListItem = ({
         {name}
       </Typography>
       <Typography> {t("dollarOfferPrice", { offerPrice })} </Typography>
-      <AddToCart {...{ availableQuantity, slug }} />
+      <AddToCart {...{ slug }} />
     </Link>
   );
 };
