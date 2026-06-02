@@ -53,8 +53,6 @@ const Carousel = ({ imageUrls, title }) => {
       </div>
       <div className="flex space-x-1">
         {imageUrls.map((_, ind) => (
-          // const defaultClass = "neeto-ui-border-black neeto-ui-rounded-full h-3 w-3 cursor-pointer border"
-          // const dotClassName = ind === currentIndex ? defaultClass.concat(" neeto-ui-bg-black") : defaultClass
           <span
             key={ind}
             className={classNames(

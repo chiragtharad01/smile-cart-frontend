@@ -10,12 +10,14 @@ import {
 import useSelectedQuantity from "hooks/useSelectedQuantity";
 import { Button, Typography } from "neetoui";
 import { append, isNotNil } from "ramda";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import routes from "routes";
 
 import Carousel from "./Carousel";
 
 const Product = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -25,9 +27,8 @@ const Product = () => {
     try {
       const response = await productsApi.show(slug);
       setProduct(response);
-    } catch (err) {
+    } catch {
       setIsError(true);
-      console.log("An error occured: ", err);
     } finally {
       setIsLoading(false);
     }
@@ -68,18 +69,18 @@ const Product = () => {
         </div>
         <div className="w-3/5 space-y-4">
           <Typography>{description}</Typography>
-          <Typography>MRP: {mrp}</Typography>
+          <Typography>{t("mrp", { mrp })}</Typography>
           <Typography className="font-semibold">
-            Offer price: {offerPrice}
+            {t("offerPriceProduct", { offerPrice })}
           </Typography>
           <Typography className="font-semibold text-green-600">
-            {discountPercentage}% off
+            {t("percentOff", { discountPercentage })}
           </Typography>
           <div className="flex space-x-10">
             <AddToCart {...{ availableQuantity, slug }} />
             <Button
               className="bg-neutral-800 hover:bg-neutral-950"
-              label="Buy now"
+              label={t("buyNow")}
               size="large"
               to={routes.checkout}
               onClick={() => setSelectedQuantity(selectedQuantity || 1)}

@@ -3,10 +3,12 @@ import { useRef } from "react";
 import { VALID_COUNT_REGEX } from "components/constants";
 import useSelectedQuantity from "hooks/useSelectedQuantity";
 import { Button, Input, Toastr } from "neetoui";
+import { useTranslation } from "react-i18next";
 
 import TooltipWrapper from "./TooltipWrapper";
 
 const ProductQuantity = ({ slug, availableQuantity }) => {
+  const { t } = useTranslation();
   const countInputFocus = useRef(null);
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
   const parsedSelectedQuantity = parseInt(selectedQuantity) || 0;
@@ -53,7 +55,7 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
         onClick={preventNavigation}
       />
       <TooltipWrapper
-        content="Reached maximum units"
+        content={t("reachedMaxUnits")}
         position="top"
         showTooltip={isNotValidQuantity}
       >

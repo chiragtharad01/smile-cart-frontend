@@ -6,15 +6,16 @@ import { MRP, OFFER_PRICE } from "components/constants";
 import { cartTotalOf } from "components/utils";
 import { NoData, Toastr } from "neetoui";
 import { isEmpty, keys } from "ramda";
+import { useTranslation } from "react-i18next";
 import useCartItemsStore from "stores/useCartItemsStore";
 
 import PriceCard from "./PriceCard";
 import ProductCard from "./ProductCard";
 
 const Cart = () => {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const { cartItems, setSelectedQuantity } = useCartItemsStore();
   const { cartItems, setSelectedQuantity } = useCartItemsStore.pick();
   const slugs = keys(cartItems);
 
@@ -33,16 +34,9 @@ const Cart = () => {
 
         setSelectedQuantity(slug, availableQuantity);
         if (availableQuantity === 0) {
-          Toastr.error(
-            `${name} is no longer available and has been removed from cart`,
-            {
-              autoClose: 2000,
-            }
-          );
+          Toastr.error(t("toastrError", { name }), { autoClose: 2000 });
         }
       });
-    } catch (err) {
-      console.log("An error occured:", err);
     } finally {
       setIsLoading(false);
     }
@@ -56,7 +50,7 @@ const Cart = () => {
   if (isEmpty(products)) {
     return (
       <>
-        <Header title="My Cart" />
+        <Header title={t("myCartTitle")} />
         <div className="flex h-screen items-center justify-center">
           <NoData title="Your cart is empty!" />
         </div>
@@ -66,7 +60,7 @@ const Cart = () => {
 
   return (
     <>
-      <Header title="My Cart" />;
+      <Header title={t("myCartTitle")} />;
       <div className="mt-10 flex justify-center space-x-10">
         <div className="w-1/3 space-y-5">
           {products.map(product => (
