@@ -33,14 +33,13 @@ export const useFetchCartProducts = slugs => {
 
         setSelectedQuantity(slug, availableQuantity);
         if (availableQuantity === 0) {
-          Toastr.error(t("toastrError", { name }), {
+          Toastr.error(t("product.error.removedFromCart", { name }), {
             autoClose: 2000,
           });
         }
       },
     }))
   );
-
   const data = responses.map(prop("data")).filter(Boolean);
   const isLoading = existsBy({ isLoading: true }, responses);
 

@@ -19,19 +19,6 @@ const showErrorToastr = error => {
   }
 };
 
-const setHttpHeaders = () => {
-  axios.defaults.headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  };
-};
-
-const requestInterceptors = () => {
-  axios.interceptors.request.use(
-    evolve({ data: serializeKeysToSnakeCase, params: serializeKeysToSnakeCase })
-  );
-};
-
 const transformResponseKeysToCamelCase = response => {
   if (response.data) response.data = keysToCamelCase(response.data);
 };
@@ -50,6 +37,19 @@ const responseInterceptors = () => {
       return Promise.reject(error);
     }
   );
+};
+
+const requestInterceptors = () => {
+  axios.interceptors.request.use(
+    evolve({ data: serializeKeysToSnakeCase, params: serializeKeysToSnakeCase })
+  );
+};
+
+const setHttpHeaders = () => {
+  axios.defaults.headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
 };
 
 export default function initializeAxios() {
