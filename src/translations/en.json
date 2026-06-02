@@ -23,5 +23,13 @@
   "product": "Product",
   "toastrError": "{{name}} is no longer available and has been removed from cart",
   "myCartTitle": "My Cart",
-  "addToCart": "Add to cart"
+  "addToCart": "Add to cart",
+  "title": "Smile Cart",
+  "pageTitle": "{{title}} | Smile Cart",
+  "cart": {
+    "title": "My cart"
+  },
+  "productList": {
+    "title": "Product List"
+  }
 }
