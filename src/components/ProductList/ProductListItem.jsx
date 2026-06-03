@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { AddToCart } from "components/commons";
 import { Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
@@ -23,4 +25,4 @@ const ProductListItem = ({ imageUrl, name, offerPrice, slug }) => {
   );
 };
 
-export default ProductListItem;
+export default memo(ProductListItem);
