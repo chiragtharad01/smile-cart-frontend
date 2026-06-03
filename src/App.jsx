@@ -20,7 +20,7 @@ const App = () => {
         <NavLink exact activeClassName="underline font-bold" to="/products">
           {t("home")}
         </NavLink>
-        <NavLink exact activeClassName="underline font-bold" to="/product">
+        <NavLink exact activeClassName="underline font-bold" to="/products">
           {t("product")}
         </NavLink>
       </div>
